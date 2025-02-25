@@ -1,18 +1,29 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { AlertCircle } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function Index() {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
+    // Check URL parameters for errors
+    const params = new URLSearchParams(location.search);
+    const errorDesc = params.get('error_description');
+    if (errorDesc) {
+      setError("Please sign in with your NEU email address (@neu.edu.ph)");
+    }
+
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
@@ -50,12 +61,13 @@ export default function Index() {
     };
 
     checkUser();
-  }, [navigate, toast]);
+  }, [navigate, toast, location]);
 
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
+    setError(null);
     try {
-      const { data, error } = await supabase.auth.signInWithOAuth({
+      const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
           redirectTo: window.location.origin,
@@ -68,35 +80,18 @@ export default function Index() {
         },
       });
 
-      // If there's no error and no data, it means the popup was closed
-      if (!error && !data) {
-        toast({
-          variant: "destructive",
-          title: "Authentication Cancelled",
-          description: "Sign in was cancelled.",
-        });
-      }
-
       if (error) {
-        toast({
-          variant: "destructive",
-          title: "Authentication Error",
-          description: "Please use your NEU email address (@neu.edu.ph) to sign in.",
-        });
+        setError("Failed to sign in. Please try again.");
       }
     } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Authentication Error",
-        description: "An unexpected error occurred during sign in.",
-      });
+      setError("An unexpected error occurred during sign in.");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white p-4">
+    <div className="min-h-screen flex items-center justify-center bg-green-500 p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -121,6 +116,13 @@ export default function Index() {
                 Sign in with your NEU account to continue
               </p>
             </div>
+
+            {error && (
+              <Alert variant="destructive">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
 
             <Button
               onClick={handleGoogleSignIn}
