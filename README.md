@@ -1,68 +1,100 @@
-# Welcome to your Lovable project
+# NEU-STAT: Salaysay Tracking And Archival Tool
 
-## Project info
+## Project Overview
 
-**URL**: https://lovable.dev/projects/4bd05062-cdea-4d9a-b8ea-91f1485f6fc8
-## How can I edit this code?
+**Project URL**: https://neu-salaysay-tracker.lovable.app/
 
-There are several ways of editing your application.
+NEU-STAT (Salaysay Tracking And Archival Tool) is a web application developed for New Era University to streamline the submission, tracking, and archiving of "salaysay" documents. A "salaysay" is a formal excuse or explanation letter commonly used in Philippine educational institutions when students need to explain absences or other academic issues.
 
-**Use Lovable**
+## Key Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/4bd05062-cdea-4d9a-b8ea-91f1485f6fc8) and start prompting.
+**User Authentication**
+- Google Sign-In integration specifically restricted to NEU email domains (@neu.edu.ph)
+- User profile management with avatar support
+- Session tracking and activity logging
 
-Changes made via Lovable will be committed automatically to this repo.
+**Document Management**
+- Upload and analysis of salaysay documents in PDF format
+- Support for image uploads (JPG, PNG) with automatic conversion to PDF with OCR
+- AI-powered document analysis that extracts:
+  - Student ID/Number
+  - Student Name
+  - Submission Date
+  - Nature of Excuse
+  - Addressee information
+- Automatic violation type categorization (Attendance Issue, Academic Misconduct, etc.)
+- Support for both English and Tagalog language documents with translation capabilities
 
-**Use your preferred IDE**
+**Dashboard and Analytics**
+- Comprehensive dashboard with document statistics
+- Interactive charts displaying violation distribution
+- Top submitters tracking
+- Filtering by violation type, date range, and keywords
+- Full-text search across documents
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+**Activity Tracking**
+- Complete audit trail of user actions
+- Login/logout tracking
+- Document upload and viewing history
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Technical Stack
 
-Follow these steps:
+**Frontend**
+- React with TypeScript
+- Vite as build tool
+- Tailwind CSS for styling
+- shadcn/ui component library
+- Framer Motion for animations
+- Recharts for data visualization
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+**Backend**
+- Supabase for database and authentication
+  - PostgreSQL database
+  - Row Level Security for data protection
+  - Storage buckets for document management
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+**Document Processing**
+- PDF.js for PDF text extraction
+- Tesseract.js for OCR processing
+- Image-to-PDF conversion
+- AI-powered text analysis for metadata extraction
 
-# Step 3: Install the necessary dependencies.
-npm i
+## Database Schema
+The application utilizes three main tables:
+1. profiles - Stores user profile information
+2. salaysay_submissions - Records document submissions with metadata
+3. activity_logs - Tracks user activity and system events
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+## Getting Started
+**Prerequisites**
+- Node.js and npm installed
+- Supabase project set up with tables: profiles, salaysay_submissions, activity_logs
+- Google OAuth credentials configured in Supabase
+
+**Installation**
+1. Clone the Repository:
+```
+git clone https://github.com/LesterNevado/neu-salaysay-tracker.git
+cd neu-salaysay-tracker
+```
+2. Install dependencies:
+```
+npm install
+```
+3. Start the development server:
+```
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Project Structure
+- /src/components - React components
+- /src/components/salaysay - Dashboard and file management components
+- /src/components/upload - File upload components and logic
+- /src/components/ui - Reusable UI components
+- /src/utils/ai - AI text analysis utilities
+- /src/utils/pdf - PDF processing utilities
+- /src/integrations/supabase - Supabase client and configuration
+- /src/pages - Main application pages
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/efe86669-a760-4cb1-b947-dfed2f4017e1) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+## Deployment
+The project is deployed via Lovable and can be accessed at the project URL.
