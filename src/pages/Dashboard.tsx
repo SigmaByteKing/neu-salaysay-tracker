@@ -393,7 +393,7 @@ export default function Dashboard() {
       ? 'bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900' 
       : 'bg-gradient-to-br from-blue-100 via-blue-50 to-blue-100'}`}>
     
-    {/* Background Patterns - matching login page*/} 
+    {/* Background Patterns*/} 
     <div className="fixed inset-0 w-full h-full overflow-hidden z-0 opacity-30">
       <div className="fixed w-full h-full">
         {["top-0 left-0", "top-0 right-0", "bottom-0 left-0", "bottom-0 right-0"].map((pos, i) => (
@@ -460,7 +460,7 @@ export default function Dashboard() {
       </div>
     </header>
     
-    <div className="container mx-auto px-6 py-8 max-w-6xl relative z-10">
+ <div className="container mx-auto px-4 py-6 max-w-7xl relative z-10">
       {/* Welcome Card */}
       <Card className={`${darkMode 
         ? 'bg-gray-800/80 backdrop-blur-sm border-gray-700' 
@@ -468,9 +468,9 @@ export default function Dashboard() {
         rounded-xl shadow-lg mb-8`}>
         <div className="flex justify-between items-center p-6">
           <div>
-            <h2 className={`text-2xl font-bold ${darkMode ? 'text-blue-300' : 'text-blue-800'}`}>Salaysay Tracking And Archival Tool</h2>
-            <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'} mt-1`}>
-              NEU-STAT is New Era University's official Salaysay Tracking System, enabling seamless submission, monitoring, and approval of Salaysay documents.
+            <h2 className={`text-2xl font-bold ${darkMode ? 'text-blue-300' : 'text-blue-800'}`}>Welcome to NEU-STAT Dashboard</h2>
+            <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'} mt-1 text-sm`}>
+              New Era University's official Salaysay Tracking System for seamless document management
             </p>
           </div>
           <div className="flex gap-3">

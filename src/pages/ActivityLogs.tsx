@@ -297,8 +297,8 @@ export default function ActivityLogs() {
         </svg>
       </div>
 
-      {/* Header */}
-        <header className={`h-24 flex items-center justify-between px-8 shadow-lg sticky top-0 z-10 ${darkMode 
+{/* Header */}
+        <header className={`h-24 flex items-center justify-between px-8 shadow-lg sticky top-0 z-50 ${darkMode 
           ? 'bg-gray-900/80 backdrop-blur-md' 
           : 'bg-white/80 backdrop-blur-md'}`}>
     <div className="flex items-center gap-4">
@@ -309,7 +309,9 @@ export default function ActivityLogs() {
       />
       <div>
       <h1 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-blue-900'}`}>NEU-STAT</h1>
-      <p className="text-sm text-blue-900">Salaysay Tracking And Archival Tool</p>
+      <p className={`${darkMode ? 'text-white' : 'text-blue-900'} mt-1 text-sm`}>
+              Salaysay Tracking And Archival Tool
+            </p>
     </div>
      </div>
   
